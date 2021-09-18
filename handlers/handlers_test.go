@@ -39,7 +39,7 @@ func TestHandleList(t *testing.T) {
 		res, err := app.Test(req, -1)
 		assert.Nil(t, err, "unexpected to get an error")
 
-		assert.Equalf(t, http.StatusOK, res.StatusCode, "expected to get internal server error but got=%d", res.StatusCode)
+		assert.Equalf(t, http.StatusOK, res.StatusCode, "expected to get status ok but got=%d", res.StatusCode)
 		assert.Equal(t, fiber.MIMEApplicationJSON, res.Header.Get("Content-Type"))
 	})
 
