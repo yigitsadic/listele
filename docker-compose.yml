@@ -3,9 +3,20 @@ version: "3.3"
 services:
   database:
     image: postgres:alpine3.14
+    volumes:
+      - data:/var/lib/postgresql/data
     environment:
-      - "POSTGRES_PASSWORD=myexample"
-      - "POSTGRES_USER=myexampleuser"
-      - "POSTGRES_DB=listele"
+      - "POSTGRES_PASSWORD=lorems"
+      - "POSTGRES_USER=listele_user"
+      - "POSTGRES_DB=listele_project"
+  app:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    restart: on-failure
+    environment:
+      - "DATASOURCE=postgres://listele_user:lorems@database:5432/listele_project?sslmode=disable"
     ports:
-      - "6500:5432"
+      - "3035:3035"
+volumes:
+  data:
