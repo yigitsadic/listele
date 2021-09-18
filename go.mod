@@ -2,7 +2,10 @@ module github.com/yigitsadic/listele
 
 go 1.17
 
-require github.com/gofiber/fiber/v2 v2.18.0
+require (
+	github.com/gofiber/fiber/v2 v2.18.0
+	github.com/stretchr/testify v1.7.0
+)
 
 require (
 	github.com/andybalholm/brotli v1.0.3 // indirect
@@ -10,7 +13,6 @@ require (
 	github.com/klauspost/compress v1.13.6 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/stretchr/objx v0.1.0 // indirect
-	github.com/stretchr/testify v1.7.0 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	github.com/valyala/fasthttp v1.30.0 // indirect
 	github.com/valyala/tcplisten v1.0.0 // indirect
