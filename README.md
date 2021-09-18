@@ -8,7 +8,24 @@ Application serves records found on `people` table as JSON list.
 
 To run `docker-compose up`
 
-`curl http://localhost:3035`
+`curl http://localhost:3035 | jq`
+
+```json
+[
+  {
+    "full_name": "John Doe"
+  },
+  {
+    "full_name": "Aida Bugg"
+  },
+  {
+    "full_name": "Maureen Biologist"
+  },
+  {
+    "full_name": "Allie Grater"
+  }
+]
+```
 
 Run tests:
 
