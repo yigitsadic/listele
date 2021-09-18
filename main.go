@@ -7,6 +7,7 @@ import (
 	"github.com/yigitsadic/listele/database"
 	"github.com/yigitsadic/listele/handlers"
 	"log"
+	"os"
 
 	_ "github.com/golang-migrate/migrate/v4/database/postgres"
 	_ "github.com/golang-migrate/migrate/v4/source/file"
@@ -14,7 +15,15 @@ import (
 )
 
 func main() {
-	dataSource := "postgres://myexampleuser:myexample@localhost:6500/listele?sslmode=disable"
+	dataSource := os.Getenv("DATASOURCE")
+	if dataSource == "" {
+		dataSource = "postgres://listele_user:lorems@database:5432/listele_project?sslmode=disable"
+	}
+
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "3035"
+	}
 
 	db, err := sql.Open("postgres", dataSource)
 	if err != nil {
@@ -22,7 +31,7 @@ func main() {
 	}
 
 	if err = db.Ping(); err != nil {
-		log.Fatal("unable to ping database")
+		log.Fatal("unable to ping database, err=", err)
 	}
 
 	m, err := migrate.New("file://db/migrations", dataSource)
@@ -42,5 +51,5 @@ func main() {
 
 	app.Get("/", handlers.HandleList(&repo))
 
-	log.Fatalln(app.Listen(":3035"))
+	log.Fatalln(app.Listen(":" + port))
 }
