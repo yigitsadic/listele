@@ -2,10 +2,12 @@ package database
 
 import "database/sql"
 
+// PeopleRepository is a struct to interact with database.
 type PeopleRepository struct {
 	Database *sql.DB
 }
 
+// FindAll satisfies interface. Fetches all records in people table.
 func (p *PeopleRepository) FindAll() ([]Person, error) {
 	rows, err := p.Database.Query("SELECT fullname FROM people")
 	if err != nil {
